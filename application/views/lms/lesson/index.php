@@ -8,11 +8,11 @@
             <i class="fa fa-download"></i> <?php echo $this->lang->line('download_center'); ?></h1>
 
     </section>
- 
+
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            
+
             <div class="col-md-<?php
             if ($this->rbac->hasPrivilege('upload_content', 'can_add')) {
                 echo "12";
@@ -23,7 +23,7 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header ptbnull">
-                        
+
                         <h3 class="box-title titlefix"><?php echo $heading ?></h3>
 
                         <div class="box-tools pull-right">
@@ -34,9 +34,34 @@
                         <div class="mailbox-controls">
                             <!-- Check all button -->
                             <div class="pull-right">
-                                
+
                             </div><!-- /.pull-right -->
                         </div>
+
+                        <!-- this is for the filter based on subjects -->
+                        <form method="post" >
+                          <select id="selectedSubject" name="selectedSubject" class="form-control" onchange="this.form.submit();">
+                              <?php
+                              $ctr = 0;
+                                foreach ($subjects as $subject) {
+                                  if(!isset($_POST['selectedSubject'])){
+                                    if($ctr == 0){
+                                      // sets the first element of subjects list as the initial subject_name filter
+                                      $_POST['selectedSubject'] = $subject['name'];
+                                      $ctr++;
+                                    }
+                                  }
+                              ?>
+                                <option value="<?php echo $subject['name'] ?>"
+                                  <?php echo (isset($_POST['selectedSubject']) && $_POST['selectedSubject'] == $subject['name'])?'selected="selected"':''; ?>
+                                ><?php echo $subject['name'] ?></option>
+                              <?php
+                                }
+
+                              ?>
+                          </select>
+                        </form>
+
                         <div class="mailbox-messages table-responsive">
                             <div class="download_label"><?php echo $this->lang->line('content_list'); ?></div>
 
@@ -60,110 +85,121 @@
                                             <th>Shared</th>
                                         <?php endif; ?>
                                         <!-- <th>Status</th> -->
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    <?php foreach ($list as $list_key => $list_data): ?>
+                                    <?php
+                                    foreach ($list as $list_key => $list_data):
+                                      if(isset($_POST['selectedSubject'])){
+                                        $selectedSubject = $_POST['selectedSubject'];
+                                        if($list_data['subject_name'] == $selectedSubject){
+                                    ?>
+                                          <tr>
+                                              <td class="mailbox-date pull-right">
+                                                  <?php if($role=="admin"): ?>
 
-                                        <tr>
-                                            <td class="mailbox-date pull-right">
-                                                <?php if($role=="admin"): ?>
+                                                      <?php if($list_data['lesson_type'] == "virtual"||$list_data['lesson_type'] == "zoom"): ?>
+                                                          <?php if($lesson_query=="today"): ?>
+                                                              <a data-placement="left" href="<?php echo site_url('lms/lesson/create/'.$list_data['id']);?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="Start Class" >
+                                                                      <i class="fa fa-sign-in"></i> Start Class
+                                                              </a>
+                                                          <?php endif; ?>
+                                                          <?php if($real_role=="7"||$real_role=="1"): ?>
+                                                              <?php if($list_data['lesson_type'] == "virtual"): ?>
+                                                                  <a data-placement="left" href="<?php echo $list_data['teacher_google_meet'];?>" target="_blank" class="btn btn-default btn-xs"  data-toggle="tooltip" title="Join Meet" >
+                                                                          <i class="fa fa-sign-in"></i> Join Meet
+                                                                  </a>
+                                                              <?php endif; ?>
+                                                              <?php if($list_data['lesson_type'] == "zoom"): ?>
+                                                                  <a data-placement="left" href="<?php echo base_url('lms/lesson/zoom_checker') ;?>" target="_blank" class="btn btn-default btn-xs" data-toggle="tooltip" title="Join Zoom" >
+                                                                          <i class="fa fa-sign-in"></i> Join Zoom
+                                                                  </a>
+                                                              <?php endif; ?>
+                                                          <?php endif; ?>
+                                                      <?php endif; ?>
+                                                      <a data-placement="right" href="#" onclick="attendance('<?php echo $list_data['id'] ?>','<?php echo addslashes($list_data['lesson_name']) ?>')" class="btn btn-default btn-xs"  data-toggle="tooltip" title="Lesson Student Logs (See students who accessed the lessons)" >
+                                                                      <i class="fa fa-users"></i>
+                                                      </a>
+                                                      <a data-placement="right" href="#" class="btn btn-default btn-xs"  data-toggle="tooltip" onclick="email_logs('<?php echo $list_data['id'] ?>','<?php echo addslashes($list_data['lesson_name']) ?>')" title="Email Logs(See if the notification was sent to parents)" >
+                                                                      <i class="fa fa-envelope"></i>
+                                                      </a>
+                                                      <a data-placement="left" href="<?php echo site_url('lms/lesson/create/'.$list_data['id']);?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('edit'); ?>" >
+                                                              <i class="fa fa-edit"></i>
+                                                      </a>
+                                                      <a data-placement="left" href="<?php echo site_url('lms/lesson/delete/'.$list_data['id']);?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm('<?php echo $this->lang->line('delete_confirm') ?>');">
+                                                          <i class="fa fa-remove"></i>
+                                                      </a>
 
-                                                    <?php if($list_data['lesson_type'] == "virtual"||$list_data['lesson_type'] == "zoom"): ?>
-                                                        <?php if($lesson_query=="today"): ?>
-                                                            <a data-placement="left" href="<?php echo site_url('lms/lesson/create/'.$list_data['id']);?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="Start Class" >
-                                                                    <i class="fa fa-sign-in"></i> Start Class
-                                                            </a>
-                                                        <?php endif; ?>
-                                                        <?php if($real_role=="7"||$real_role=="1"): ?>
-                                                            <?php if($list_data['lesson_type'] == "virtual"): ?>
-                                                                <a data-placement="left" href="<?php echo $list_data['teacher_google_meet'];?>" target="_blank" class="btn btn-default btn-xs"  data-toggle="tooltip" title="Join Meet" >
-                                                                        <i class="fa fa-sign-in"></i> Join Meet
-                                                                </a>
-                                                            <?php endif; ?>
-                                                            <?php if($list_data['lesson_type'] == "zoom"): ?>
-                                                                <a data-placement="left" href="<?php echo base_url('lms/lesson/zoom_checker') ;?>" target="_blank" class="btn btn-default btn-xs" data-toggle="tooltip" title="Join Zoom" >
-                                                                        <i class="fa fa-sign-in"></i> Join Zoom
-                                                                </a>
-                                                            <?php endif; ?>
-                                                        <?php endif; ?>
-                                                    <?php endif; ?>
-                                                    <a data-placement="right" href="#" onclick="attendance('<?php echo $list_data['id'] ?>','<?php echo addslashes($list_data['lesson_name']) ?>')" class="btn btn-default btn-xs"  data-toggle="tooltip" title="Lesson Student Logs (See students who accessed the lessons)" >
-                                                                    <i class="fa fa-users"></i>
-                                                    </a>
-                                                    <a data-placement="right" href="#" class="btn btn-default btn-xs"  data-toggle="tooltip" onclick="email_logs('<?php echo $list_data['id'] ?>','<?php echo addslashes($list_data['lesson_name']) ?>')" title="Email Logs(See if the notification was sent to parents)" >
-                                                                    <i class="fa fa-envelope"></i>
-                                                    </a>
-                                                    <a data-placement="left" href="<?php echo site_url('lms/lesson/create/'.$list_data['id']);?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('edit'); ?>" >
-                                                            <i class="fa fa-edit"></i>
-                                                    </a>
-                                                    <a data-placement="left" href="<?php echo site_url('lms/lesson/delete/'.$list_data['id']);?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm('<?php echo $this->lang->line('delete_confirm') ?>');">
-                                                        <i class="fa fa-remove"></i>
-                                                    </a>
+                                                  <?php elseif($role=="student"): ?>
+                                                      <?php if($lesson_sched!="upcoming"): ?>
+                                                          <a data-placement="left" id="student_view" href="#" class="btn btn-default btn-xs"  data-toggle="tooltip" onclick="check_class('<?php echo $list_data['lesson_id'] ?>')" title="<?php echo $this->lang->line('view'); ?>" >
+                                                                      <i class="fa fa-eye"  ></i>
+                                                                      <?php if($lesson_sched == "past"): ?>
+                                                                          View Lesson
+                                                                      <?php else: ?>
 
-                                                <?php elseif($role=="student"): ?>
-                                                    <?php if($lesson_sched!="upcoming"): ?>
-                                                        <a data-placement="left" id="student_view" href="#" class="btn btn-default btn-xs"  data-toggle="tooltip" onclick="check_class('<?php echo $list_data['lesson_id'] ?>')" title="<?php echo $this->lang->line('view'); ?>" >
-                                                                    <i class="fa fa-eye"  ></i>
-                                                                    <?php if($lesson_sched == "past"): ?>
-                                                                        View Lesson
-                                                                    <?php else: ?>
+                                                                          Enter Class
+                                                                      <?php endif; ?>
+                                                          </a>
+                                                      <?php endif; ?>
 
-                                                                        Enter Class
-                                                                    <?php endif; ?>
-                                                        </a>
-                                                    <?php endif; ?>
-                                                  
-                                                <?php endif; ?>
-                                                
-                                            </td>
-                                            <td class="mailbox-name">
-                                                <?php echo $list_data['lesson_name']?>
-                                            </td>
-                                            <td class="mailbox-name">
-                                                <?php echo $list_data['subject_name']; ?>
-                                            </td>
-                                            <td class="mailbox-name">
-                                                <?php echo $list_data['name'] ?> <?php echo $list_data['surname'] ?>
-                                            </td>
+                                                  <?php endif; ?>
 
-                                            <td class="mailbox-name">
-                                               <?php echo date("M d, h:i A", strtotime($list_data['start_date'])); ?> - <?php echo date("M d, h:i A", strtotime($list_data['end_date'])); ?>
-                                            </td>
-                                            <td class="mailbox-name">
-                                                <?php echo ($list_data['lesson_type']=="virtual")?"Google Meet":$list_data['lesson_type']; ?>
-                                            </td>
-                                            
-                                            <td class="mailbox-name">
-                                                <center><?php echo $list_data['term']; ?></center>
-                                            </td>
-                                            
-                                            <?php if($role!="student"): ?>
-                                                <td class="mailbox-name">
-                                                    <?php echo $list_data['class']; ?>
-                                                </td>
-                                            <?php endif; ?>
-                                            
-                                            <!-- <td class="mailbox-name">
-                                                <?php echo str_replace("_", " ", strtoupper($list_data['education_level'])); ?>
-                                            </td> -->
-                                            <?php if($role!="student"): ?>
-                                                <td>
-                                                    <?php echo ($list_data['shared'] == 1)?"Yes":"No" ; ?>
-                                                </td>
-                                            <?php endif; ?>
-                                            <!-- <td>
-                                                <select class="lesson_status" lesson_id="<?php echo $list_data['id'] ?>" <?php if($role=="student"): ?> readonly="" <?php endif; ?> >
-                                                    <option value="awaiting">Awaiting</option>
-                                                    <option value="cancelled">Cancelled</option>
-                                                    <option value="completed">Completed</option>
-                                                </select>
-                                            </td> -->
-                                            
-                                        </tr>
-                                        <?php endforeach; ?>
+                                              </td>
+                                              <td class="mailbox-name">
+                                                  <?php echo $list_data['lesson_name']?>
+                                              </td>
+                                              <td class="mailbox-name">
+                                                  <?php echo $list_data['subject_name']; ?>
+                                              </td>
+                                              <td class="mailbox-name">
+                                                  <?php echo $list_data['name'] ?> <?php echo $list_data['surname'] ?>
+                                              </td>
+
+                                              <td class="mailbox-name">
+                                                 <?php echo date("M d, h:i A", strtotime($list_data['start_date'])); ?> - <?php echo date("M d, h:i A", strtotime($list_data['end_date'])); ?>
+                                              </td>
+                                              <td class="mailbox-name">
+                                                  <?php echo ($list_data['lesson_type']=="virtual")?"Google Meet":$list_data['lesson_type']; ?>
+                                              </td>
+
+                                              <td class="mailbox-name">
+                                                  <center><?php echo $list_data['term']; ?></center>
+                                              </td>
+
+                                              <?php if($role!="student"): ?>
+                                                  <td class="mailbox-name">
+                                                      <?php echo $list_data['class']; ?>
+                                                  </td>
+                                              <?php endif; ?>
+
+                                              <!-- <td class="mailbox-name">
+                                                  <?php echo str_replace("_", " ", strtoupper($list_data['education_level'])); ?>
+                                              </td> -->
+                                              <?php if($role!="student"): ?>
+                                                  <td>
+                                                      <?php echo ($list_data['shared'] == 1)?"Yes":"No" ; ?>
+                                                  </td>
+                                              <?php endif; ?>
+                                              <!-- <td>
+                                                  <select class="lesson_status" lesson_id="<?php echo $list_data['id'] ?>" <?php if($role=="student"): ?> readonly="" <?php endif; ?> >
+                                                      <option value="awaiting">Awaiting</option>
+                                                      <option value="cancelled">Cancelled</option>
+                                                      <option value="completed">Completed</option>
+                                                  </select>
+                                              </td> -->
+
+                                          </tr>
+
+                                    <?php
+                                        }
+                                      }
+                                      endforeach;
+                                    ?>
+
+
 
                                 </tbody>
                             </table><!-- /.table -->
@@ -204,7 +240,7 @@
 
                         <table class="table table-responsive">
                             <tr>
-                                
+
                                 <th colspan="2"><center><h4 class="note"> Please click which will you open</center></h4></th>
                             </tr>
                             <tr>
@@ -213,7 +249,7 @@
                             </tr>
                         </table>
                 <!-- </div> -->
-                
+
             </div>
         </div>
     </div>
@@ -239,7 +275,7 @@
                             <th>Timestamp</th>
                         </tr>
                     </thead>
-                    
+
                     <tbody>
                         <tr>
                             <td>Joeven Cerveza</td>
@@ -260,9 +296,9 @@
                             <th>Timestamp</th>
                         </tr>
                     </tfoot>
-                    
+
                 </table>
-                
+
             </div>
         </div>
     </div>
@@ -284,7 +320,7 @@
                             <th>Timestamp</th>
                         </tr>
                     </thead>
-                    
+
                     <tbody>
                         <tr>
                             <td>Joeven Cerveza</td>
@@ -297,9 +333,9 @@
                             <th>Timestamp</th>
                         </tr>
                     </tfoot>
-                    
+
                 </table>
-                
+
             </div>
         </div>
     </div>
@@ -337,11 +373,11 @@
                     }else{
                         $(".note").text("The teacher haven't started the class yet. But you are allowed to view the lesson");
                     }
-                    
+
                 }else{
                     $(".note").text("Please select an action.");
                 }
-                
+
 
             }else{
                 $("#view_lesson").hide();
@@ -367,7 +403,7 @@
             $.each(parsed_data,function(key,value){
                 table.row.add([value.firstname+" "+value.lastname,value.receiver,value.email_status,value.username_sent,value.password_sent,value.date_created]).draw().node();
             });
-            
+
         });
     }
 
@@ -384,7 +420,7 @@
             $.each(parsed_data,function(key,value){
                 attendance_table.row.add([value.firstname+" "+value.lastname,value.timestamp]).draw().node();
             });
-            
+
         });
     }
     $(document).ready(function () {
@@ -400,10 +436,10 @@
 
         $(".lesson_status").change(function(){
             var lesson_status_val = $(this).val();
-            
+
             alert($(this).val());
         });
-        
-        
+
+
     });
 </script>
