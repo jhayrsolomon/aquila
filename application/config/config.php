@@ -24,15 +24,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   | a PHP script and you can easily do that on your own.
   |
  */
-  
+
 $REQUEST_SCHEME = $_SERVER['REQUEST_SCHEME'];
 $HTTP_HOST = $_SERVER['HTTP_HOST'];
 if($HTTP_HOST=="localhost"){
-  $config['base_url'] = $REQUEST_SCHEME.'://'.$HTTP_HOST.'/sms';
+  $config['base_url'] = $REQUEST_SCHEME.'://'.$HTTP_HOST.'/aquila';
 }elseif(strpos($HTTP_HOST, "192.168.") !== false){
-  $config['base_url'] = $REQUEST_SCHEME.'://'.$HTTP_HOST.'/sms';
+  $config['base_url'] = $REQUEST_SCHEME.'://'.$HTTP_HOST.'/aquila';
 }elseif($HTTP_HOST=="stepsmandaluyong.com"){
-  $config['base_url'] = $REQUEST_SCHEME.'://'.$HTTP_HOST.'/cms';
+  $config['base_url'] = $REQUEST_SCHEME.'://'.$HTTP_HOST.'/aquila';
 }else{
   $config['base_url'] = 'https://'.$HTTP_HOST.'/';
 }
