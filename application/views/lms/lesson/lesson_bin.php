@@ -6,11 +6,11 @@
             <i class="fa fa-download"></i> <?php echo $this->lang->line('download_center'); ?></h1>
 
     </section>
- 
+
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            
+
             <div class="col-md-<?php
             if ($this->rbac->hasPrivilege('upload_content', 'can_add')) {
                 echo "12";
@@ -30,9 +30,34 @@
                         <div class="mailbox-controls">
                             <!-- Check all button -->
                             <div class="pull-right">
-                                
+
                             </div><!-- /.pull-right -->
                         </div>
+
+                        <!-- this is for the filter based on subjects -->
+                        <form method="post" >
+                          <select id="selectedSubject" name="selectedSubject" class="form-control" onchange="this.form.submit();">
+                              <?php
+                              $ctr = 0;
+                                foreach ($subjects as $subject) {
+                                  if(!isset($_POST['selectedSubject'])){
+                                    if($ctr == 0){
+                                      // sets the first element of subjects list as the initial subject_name filter
+                                      $_POST['selectedSubject'] = $subject['name'];
+                                      $ctr++;
+                                    }
+                                  }
+                              ?>
+                                <option value="<?php echo $subject['name'] ?>"
+                                  <?php echo (isset($_POST['selectedSubject']) && $_POST['selectedSubject'] == $subject['name'])?'selected="selected"':''; ?>
+                                ><?php echo $subject['name'] ?></option>
+                              <?php
+                                }
+
+                              ?>
+                          </select>
+                        </form>
+
                         <div class="mailbox-messages table-responsive">
                             <div class="download_label"><?php echo $this->lang->line('content_list'); ?></div>
                             <table class="table table-striped table-bordered table-hover example nowrap">
@@ -51,14 +76,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($list as $list_key => $list_data): ?>
+                                    <?php foreach ($list as $list_key => $list_data):
+                                      if(isset($_POST['selectedSubject'])){
+                                        $selectedSubject = $_POST['selectedSubject'];
+                                        if($list_data['subject_name'] == $selectedSubject){
+                                      ?>
 
                                         <tr>
                                             <td class="mailbox-date pull-right">
                                                 <a data-placement="left" href="<?php echo site_url('lms/lesson/retrieve/'.$list_data['id']);?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="Start Class" >
                                                                 <i class="fa fa-sign-out"></i> Retrieve Lesson
                                                         </a>
-                                                
+
                                             </td>
                                             <td class="mailbox-name">
                                                 <?php echo $list_data['lesson_name']?>
@@ -81,7 +110,7 @@
                                             <td class="mailbox-name">
                                                 <?php echo $list_data['class']; ?>
                                             </td>
-                                            
+
                                             <!-- <td class="mailbox-name">
                                                 <?php echo str_replace("_", " ", strtoupper($list_data['education_level'])); ?>
                                             </td> -->
@@ -95,9 +124,13 @@
                                                     <option value="completed">Completed</option>
                                                 </select>
                                             </td>
-                                            
+
                                         </tr>
-                                        <?php endforeach; ?>
+                                        <?php
+                                            }
+                                          }
+                                        endforeach;
+                                      ?>
 
                                 </tbody>
                             </table><!-- /.table -->
@@ -145,10 +178,10 @@
 
         $(".lesson_status").change(function(){
             var lesson_status_val = $(this).val();
-            
+
             alert($(this).val());
         });
-        
-        
+
+
     });
 </script>

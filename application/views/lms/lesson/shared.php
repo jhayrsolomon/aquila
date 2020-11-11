@@ -6,11 +6,11 @@
             <i class="fa fa-download"></i> <?php echo $this->lang->line('download_center'); ?></h1>
 
     </section>
- 
+
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            
+
             <div class="col-md-<?php
             if ($this->rbac->hasPrivilege('upload_content', 'can_add')) {
                 echo "12";
@@ -33,6 +33,31 @@
 
                             </div><!-- /.pull-right -->
                         </div>
+
+                        <!-- this is for the filter based on subjects -->
+                        <form method="post" >
+                          <select id="selectedSubject" name="selectedSubject" class="form-control" onchange="this.form.submit();">
+                              <?php
+                              $ctr = 0;
+                                foreach ($subjects as $subject) {
+                                  if(!isset($_POST['selectedSubject'])){
+                                    if($ctr == 0){
+                                      // sets the first element of subjects list as the initial subject_name filter
+                                      $_POST['selectedSubject'] = $subject['name'];
+                                      $ctr++;
+                                    }
+                                  }
+                              ?>
+                                <option value="<?php echo $subject['name'] ?>"
+                                  <?php echo (isset($_POST['selectedSubject']) && $_POST['selectedSubject'] == $subject['name'])?'selected="selected"':''; ?>
+                                ><?php echo $subject['name'] ?></option>
+                              <?php
+                                }
+
+                              ?>
+                          </select>
+                        </form>
+
                         <div class="mailbox-messages table-responsive">
                             <div class="download_label"><?php echo $this->lang->line('content_list'); ?></div>
                             <table class="table table-striped table-bordered table-hover example nowrap">
@@ -50,7 +75,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($list as $list_key => $list_data): ?>
+                                    <?php foreach ($list as $list_key => $list_data):
+                                      if(isset($_POST['selectedSubject'])){
+                                        $selectedSubject = $_POST['selectedSubject'];
+                                        if($list_data['name'] == $selectedSubject){
+                                      ?>
 
                                         <tr>
                                             <td class="mailbox-name">
@@ -88,10 +117,14 @@
                                                             <i class="fa fa-eye"></i>
                                                     </a>
                                                 <?php endif; ?>
-                                                
+
                                             </td>
                                         </tr>
-                                        <?php endforeach; ?>
+                                        <?php
+                                            }
+                                          }
+                                        endforeach;
+                                      ?>
 
                                 </tbody>
                             </table><!-- /.table -->
