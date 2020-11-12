@@ -11,7 +11,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
     }
 </style>
 
-<div class="content-wrapper" style="min-height: 946px;">  
+<div class="content-wrapper" style="min-height: 946px;">
     <section class="content-header">
         <h1>
             <i class="fa fa-user-plus"></i> <?php echo $this->lang->line('student_information'); ?> <small><?php echo $this->lang->line('student1'); ?></small></h1>
@@ -24,7 +24,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                     <div class="box-header with-border">
                         <h3 class="box-title"><i class="fa fa-search"></i> <?php echo $this->lang->line('select_criteria'); ?></h3>
                     </div>
-                    <div class="box-body">                        
+                    <div class="box-body">
                         <?php if ($this->session->flashdata('msg')) { ?> <div class="alert alert-success">  <?php echo $this->session->flashdata('msg') ?> </div> <?php } ?>
 
                         <div class="row">
@@ -33,8 +33,8 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                     <form role="form" action="<?php echo site_url('student/SendDocs') ?>" method="post" class="">
                                         <?php echo $this->customlib->getCSRF(); ?>
                                         <div class="col-sm-6">
-                                            <div class="form-group"> 
-                                                <label><?php echo $this->lang->line('class'); ?></label> <small class="req"> *</small> 
+                                            <div class="form-group">
+                                                <label><?php echo $this->lang->line('class'); ?></label> <small class="req"> *</small>
                                                 <select autofocus="" id="class_id" name="class_id" class="form-control" >
                                                     <option value=""><?php echo $this->lang->line('select'); ?></option>
                                                     <?php
@@ -50,12 +50,12 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label><?php echo $this->lang->line('section'); ?></label><small class="req"> *</small> 
+                                                <label><?php echo $this->lang->line('section'); ?></label><small class="req"> *</small>
                                                 <select  id="section_id" name="section_id" class="form-control" >
                                                     <option value=""><?php echo $this->lang->line('select'); ?></option>
                                                 </select>
                                                 <span class="text-danger"><?php echo form_error('section_id'); ?></span>
-                                            </div>   
+                                            </div>
                                         </div>
 
                                         <div class="col-sm-12">
@@ -63,27 +63,27 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                 <button type="submit" name="search" value="search_filter" class="btn btn-primary btn-sm pull-right checkbox-toggle"><i class="fa fa-search"></i> <?php echo $this->lang->line('search'); ?></button>
                                             </div>
                                         </div>
-                                    </form>    
+                                    </form>
                                 </div>
                             </div><!--./col-md-6-->
                         </div><!--./row-->
                     </div>
-                    
-                    <?php 
-                    
+
+                    <?php
+
                     $resultsize = sizeof($resultlist);
                     if (isset($resultlist)) { ?>
-                    
+
                     <form id='frm_senddocs' action="<?php echo site_url('student/Upload_Documents') ?>"  method="post" accept-charset="utf-8" enctype="multipart/form-data">
                     <div class="nav-tabs-custom border0 navnoshadow">
-                        <div class="box-header ptbnull"></div>  
+                        <div class="box-header ptbnull"></div>
                         <ul class="nav nav-tabs">
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label><?php echo $this->lang->line('doctitle'); ?></label><small class="req"> *</small>
                                     <input type="text" class="form-control" name="doctitle" placeholder="Enter the document title">
                                     <span class="text-danger"><?php echo form_error('doctitle'); ?></span>
-                                </div>   
+                                </div>
                             </div>
                             <!-- <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true"><i class="fa fa-list"></i> <?php echo $this->lang->line('list'); ?>  <?php echo $this->lang->line('view'); ?></a></li>
                             <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false"><i class="fa fa-newspaper-o"></i> <?php echo $this->lang->line('details'); ?> <?php echo $this->lang->line('view'); ?></a></li> -->
@@ -94,27 +94,27 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                             <div class="tab-pane active table-responsive no-padding" id="tab_1">
                                 <table class="table table-striped table-bordered table-hover example nowrap" cellspacing="0" width="100%">
                                     <thead>
-                                        <tr>								
-                                            <th><?php echo $this->lang->line('roll_no'); ?></th>									
+                                        <tr>
+                                            <th><?php echo $this->lang->line('roll_no'); ?></th>
                                             <th><?php echo $this->lang->line('student_name'); ?></th>
-                                            <th><?php echo $this->lang->line('class'); ?></th>											
+                                            <th><?php echo $this->lang->line('class'); ?></th>
                                             <th><?php echo $this->lang->line('gender'); ?></th>
                                             <th class="text-center"><?php echo $this->lang->line('documents'); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php if (empty($resultlist)) { ?>                                                             
-                                        <?php } 
+                                        <?php if (empty($resultlist)) { ?>
+                                        <?php }
                                         else {
                                             $count = 1;
 
                                             foreach ($resultlist as $student) { ?>
-                                                <tr>											
-                                                    <input type="hidden" name="id_num[]" value="<?php echo $student['id']; ?>">	
-                                                    <td><?php echo $student['roll_no']; ?></td>											
-                                                    <td><a href="<?php echo base_url(); ?>student/view/<?php echo $student['id']; ?>"><?php echo $student['firstname'] . " " . $student['lastname']; ?></a></td>
-                                                    <td><?php echo $student['class'] . "(" . $student['section'] . ")" ?></td>                                                    
-                                                    <td><?php echo $student['gender']; ?></td>                                                    
+                                                <tr>
+                                                    <input type="hidden" name="id_num[]" value="<?php echo $student['id']; ?>">
+                                                    <td><?php echo $student['roll_no']; ?></td>
+                                                    <td><a href="<?php echo base_url(); ?>student/view/<?php echo $student['id']; ?>"><?php echo $student['lastname'] . ", " . $student['firstname']; ?></a></td>
+                                                    <td><?php echo $student['class'] . "(" . $student['section'] . ")" ?></td>
+                                                    <td><?php echo $student['gender']; ?></td>
                                                     <td>
                                                         <input name="docs<?php echo $student['id'] ?>[]" placeholder="" type="file" multiple class="form-control filestyle" data-height="25"  value="<?php echo set_value('first_doc'); ?>" />
                                                         <!-- <input name="docs<?php //echo $student['id'] ?>" placeholder="" type="file" multiple class="form-control filestyle" data-height="25"  value="<?php //echo set_value('first_doc'); ?>" /> -->
@@ -131,18 +131,18 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                 <div class="box-footer">
                                     <button type="submit" name="action" <?php echo($resultsize <= 0 ? 'disabled' : ''); ?> value="upload_docs" class="btn btn-primary pull-right submitdocs" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Sending"><?php echo $this->lang->line('senddocs'); ?></button>
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                     </form>
                     <?php } ?>
                 </div>
-            </div><!--./box box-primary -->     
-        </div>  
+            </div><!--./box box-primary -->
+        </div>
     </section>
 </div>
 
-<script type="text/javascript">    
+<script type="text/javascript">
     function getSectionByClass(class_id, section_id) {
         if (class_id != "" && section_id != "") {
             $('#section_id').html("");
@@ -172,7 +172,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
         var class_id = $('#class_id').val();
         var section_id = '<?php echo set_value('section_id') ?>';
         getSectionByClass(class_id, section_id);
-        
+
         $(document).on('change', '#class_id', function (e) {
             $('#section_id').html("");
             var class_id = $(this).val();
@@ -226,7 +226,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                }, 
+                },
                 complete: function (data) {
                     $this.button('reset');
                 }
