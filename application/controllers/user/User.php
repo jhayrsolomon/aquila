@@ -1,5 +1,5 @@
 <?php
-  
+
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
@@ -46,8 +46,8 @@ class User extends Student_Controller
 
     public function dashboard()
     {
-       
-      
+
+
         $this->session->set_userdata('top_menu', 'Dashboard');
         $student_id            = $this->customlib->getStudentSessionUserID();
         $student_current_class = $this->customlib->getStudentCurrentClsSection();
@@ -70,12 +70,12 @@ class User extends Student_Controller
 
             $data['examSchedule'] = array();
             $data['exam_result']  = $this->examgroupstudent_model->searchStudentExams($student['student_session_id'], true,true);
-           
+
            $ss=$this->grade_model->getGradeDetails();
-       
+
             $data['exam_grade'] = $this->grade_model->getGradeDetails();
-           
-            
+
+
             $student_doc            = $this->student_model->getstudentdoc($student_id);
             $data['student_doc']    = $student_doc;
             $data['student_doc_id'] = $student_id;
@@ -85,14 +85,14 @@ class User extends Student_Controller
             $data['student']        = $student;
 
         }
-        
+
         $data['unread_notifications'] = $this->notification_model->getUnreadStudentNotification();
-        
+
         $this->load->view('layout/student/header', $data);
         $this->load->view('user/dashboard', $data);
         $this->load->view('layout/student/footer', $data);
     }
-  
+
     public function changepass()
     {
         $data['title'] = 'Change Password';
@@ -137,7 +137,7 @@ class User extends Student_Controller
             }
         }
     }
- 
+
     public function changeusername()
     {
         $sessionData = $this->customlib->getLoggedInUserData();
@@ -149,7 +149,7 @@ class User extends Student_Controller
         if ($this->form_validation->run() == false) {
 
         } else {
- 
+
             $data_array = array(
                 'username'     => $this->input->post('current_username'),
                 'new_username' => $this->input->post('new_username'),
@@ -186,11 +186,12 @@ class User extends Student_Controller
 
     public function download($student_id, $doc)
     {
+        $origname = $_POST['docName'];
         $this->load->helper('download');
         $filepath = "./uploads/student_documents/$student_id/" . $this->uri->segment(5);
         $data     = file_get_contents($filepath);
         $name     = $this->uri->segment(6);
-        force_download($name, $data);
+        force_download($origname, $data);
     }
 
     public function user_language($lang_id)
@@ -298,10 +299,10 @@ class User extends Student_Controller
         if ($this->form_validation->run() == false) {
             $msg = array(
                 'first_title'              => form_error('first_title'),
-                'first_doc'              => form_error('first_doc')              
+                'first_doc'              => form_error('first_doc')
             );
             $array = array('status' => 'fail', 'error' => $msg, 'message' => '');
-        } 
+        }
         else {
             $student_id = $this->input->post('student_id');
             if (isset($_FILES["first_doc"]) && !empty($_FILES['first_doc']['name'])) {
@@ -309,7 +310,7 @@ class User extends Student_Controller
                 if (!is_dir($uploaddir) && !mkdir($uploaddir)) {
                     die("Error creating folder $uploaddir");
                 }
-                
+
                 $fileInfo    = pathinfo($_FILES["first_doc"]["name"]);
                 $first_title = $this->input->post('first_title');
                 $file_name   = $_FILES['first_doc']['name'];
@@ -323,7 +324,7 @@ class User extends Student_Controller
             }
 
             $msg   = $this->lang->line('success_message');
-            $array = array('status' => 'success', 'error' => '', 'message' => $msg);        
+            $array = array('status' => 'success', 'error' => '', 'message' => $msg);
         }
 
         echo json_encode($array);
@@ -332,7 +333,7 @@ class User extends Student_Controller
     public function handle_uploadcreate_doc()
     {
         $image_validate = $this->config->item('file_validate');
-      
+
         if (isset($_FILES["first_doc"]) && !empty($_FILES['first_doc']['name'])) {
             $file_type         = $_FILES["first_doc"]['type'];
             $file_size         = $_FILES["first_doc"]["size"];
@@ -357,7 +358,7 @@ class User extends Student_Controller
                 if ($file_size > $image_validate['upload_size']) {
                     $this->form_validation->set_message('handle_uploadcreate_doc', $this->lang->line('file_size_shoud_be_less_than') . number_format($image_validate['upload_size'] / 1048576, 2) . " MB");
                     return false;
-                }     
+                }
 
             return true;
         }
@@ -370,7 +371,7 @@ class User extends Student_Controller
         return true;
     }
 
-    public function handle_upload()    
+    public function handle_upload()
     {
 
         $image_validate = $this->config->item('file_validate');

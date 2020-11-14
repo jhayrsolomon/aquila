@@ -1,5 +1,5 @@
 <style type="text/css">
- 
+
     @media print
     {
         .no-print, .no-print *
@@ -84,7 +84,7 @@
                                             <?php if ($sch_setting->category) {?>
                                                 <tr>
                                                     <td><?php echo $this->lang->line('category'); ?></td>
-                                                    <td> 
+                                                    <td>
                                                         <?php foreach ($category_list as $value) {
                                                             if ($student['category_id'] == $value['id']) {
                                                                 echo $value['category'];
@@ -116,7 +116,7 @@
                                                     <td><?php echo $this->lang->line('email'); ?></td>
                                                     <td><?php echo $student['email']; ?></td>
                                                 </tr>
-                                            <?php }  
+                                            <?php }
                                             $cutom_fields_data = get_custom_table_values($student['id'], 'students');
                                             if (!empty($cutom_fields_data)) {
                                                 foreach ($cutom_fields_data as $field_key => $field_value) {?>
@@ -130,7 +130,7 @@
                                                                     echo "<li>" . $each_value . "</li>";
                                                                 }
                                                                 echo "</ul>";
-                                                            } 
+                                                            }
                                                             else {
                                                                 $display_field = $field_value->field_value;
 
@@ -185,19 +185,19 @@
                                                             echo base_url() . "uploads/student_images/no_image.png";
                                                         } ?>" ></td>
                                                 </tr>
-                                            <?php } 
+                                            <?php }
                                             if ($sch_setting->father_phone) { ?>
                                                 <tr>
                                                     <td><?php echo $this->lang->line('father_phone'); ?></td>
                                                     <td><?php echo $student['father_phone']; ?></td>
                                                 </tr>
-                                            <?php } 
+                                            <?php }
                                             if ($sch_setting->father_occupation) { ?>
                                                 <tr>
                                                     <td><?php echo $this->lang->line('father_occupation'); ?></td>
                                                     <td><?php echo $student['father_occupation']; ?></td>
                                                 </tr>
-                                            <?php } 
+                                            <?php }
                                             if ($sch_setting->mother_name) { ?>
                                                 <tr>
                                                     <td><?php echo $this->lang->line('mother_name'); ?></td>
@@ -209,13 +209,13 @@
                                                             echo base_url() . "uploads/student_images/no_image.png";
                                                         } ?>"></td>
                                                 </tr>
-                                            <?php } 
+                                            <?php }
                                             if ($sch_setting->mother_phone) { ?>
                                                 <tr>
                                                     <td><?php echo $this->lang->line('mother_phone'); ?></td>
                                                     <td><?php echo $student['mother_phone']; ?></td>
                                                 </tr>
-                                            <?php } 
+                                            <?php }
                                             if ($sch_setting->mother_occupation) { ?>
                                                 <tr>
                                                     <td><?php echo $this->lang->line('mother_occupation'); ?></td>
@@ -293,7 +293,7 @@
                                         </div>
                                     </div>
                                 <?php }
-                            } 
+                            }
                             if ($sch_setting->hostel_id) { ?>
                                 <?php if ($student['hostel_room_id'] != 0) { ?>
                                     <div class="tshadow mb25  bozero">
@@ -330,25 +330,25 @@
                                                     <td  class="col-md-4"><?php echo $this->lang->line('blood_group'); ?></td>
                                                     <td  class="col-md-5"><?php echo $student['blood_group']; ?></td>
                                                 </tr>
-                                            <?php } 
+                                            <?php }
                                             if ($sch_setting->is_student_house) { ?>
                                                 <tr>
                                                     <td  class="col-md-4"><?php echo $this->lang->line('house'); ?></td>
                                                     <td  class="col-md-5"><?php echo $student['house_name']; ?></td>
                                                 </tr>
-                                            <?php } 
+                                            <?php }
                                             if ($sch_setting->student_height) { ?>
                                                 <tr>
                                                     <td  class="col-md-4"><?php echo $this->lang->line('height'); ?></td>
                                                     <td  class="col-md-5"><?php echo $student['height']; ?></td>
                                                 </tr>
-                                            <?php } 
+                                            <?php }
                                             if ($sch_setting->student_weight) { ?>
                                                 <tr>
                                                     <td  class="col-md-4"><?php echo $this->lang->line('weight'); ?></td>
                                                     <td  class="col-md-5"><?php echo $student['weight']; ?></td>
                                                 </tr>
-                                            <?php } 
+                                            <?php }
                                             if ($sch_setting->measurement_date) { ?>
                                                 <tr>
                                                     <td  class="col-md-4"><?php echo $this->lang->line('measurement_date'); ?></td>
@@ -358,25 +358,25 @@
                                                         }?>
                                                     </td>
                                                 </tr>
-                                            <?php } 
+                                            <?php }
                                             if ($sch_setting->previous_school_details) { ?>
                                                 <tr>
                                                     <td  class="col-md-4"><?php echo $this->lang->line('previous_school_details'); ?></td>
                                                     <td  class="col-md-5"><?php echo $student['previous_school']; ?></td>
                                                 </tr>
-                                            <?php } 
+                                            <?php }
                                             if ($sch_setting->national_identification_no) { ?>
                                                 <tr>
                                                     <td  class="col-md-4"><?php echo $this->lang->line('national_identification_no'); ?></td>
                                                     <td  class="col-md-5"><?php echo $student['adhar_no']; ?></td>
                                                 </tr>
-                                            <?php } 
+                                            <?php }
                                             if ($sch_setting->local_identification_no) { ?>
                                                 <tr>
                                                     <td><?php echo $this->lang->line('local_identification_no'); ?></td>
                                                     <td><?php echo $student['samagra_id']; ?></td>
                                                 </tr>
-                                            <?php } 
+                                            <?php }
                                             if ($sch_setting->bank_account_no) { ?>
                                                 <tr>
                                                     <td><?php echo $this->lang->line('bank_account_no'); ?></td>
@@ -395,7 +395,7 @@
                                     </table>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <?php if ($this->studentmodule_lib->hasActive('fees')) { ?>
                             <div class="tab-pane" id="fee">
                                 <div class="download_label"><?php echo "Fee Details" ?></div>
@@ -419,7 +419,7 @@
                                         </thead>
 
                                         <?php if (empty($student_due_fee) && empty($student_discount_fee)) { ?>
-                                        <?php } 
+                                        <?php }
                                         else { ?>
                                             <tbody>
                                                 <?php
@@ -451,19 +451,19 @@
                                                         $total_deposite_amount = $total_deposite_amount + $fee_paid;
                                                         $total_fine_amount = $total_fine_amount + $fee_fine;
                                                         $feetype_balance = $fee_value->amount - ($fee_paid + $fee_discount);
-                                                        $total_balance_amount = $total_balance_amount + $feetype_balance; 
+                                                        $total_balance_amount = $total_balance_amount + $feetype_balance;
 
                                                         if ($feetype_balance > 0 && strtotime($fee_value->due_date) < strtotime(date('Y-m-d'))) { ?>
                                                             <tr class="danger">
-                                                        <?php } 
+                                                        <?php }
                                                         else { ?>
                                                             <tr class="dark-gray">
                                                         <?php } ?>
                                                             <td><?php echo $fee_value->name;?></td>
                                                             <td><?php echo $fee_value->code; ?></td>
                                                             <td class="text text-left">
-                                                                <?php if ($fee_value->due_date == "0000-00-00") {                                                                    
-                                                                } 
+                                                                <?php if ($fee_value->due_date == "0000-00-00") {
+                                                                }
                                                                 else {
                                                                     echo date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($fee_value->due_date));
                                                                 }?>
@@ -471,10 +471,10 @@
                                                             <td class="text text-left">
                                                                 <?php if ($feetype_balance == 0) { ?>
                                                                     <span class="label label-success"><?php echo $this->lang->line('paid'); ?></span>
-                                                                <?php } 
+                                                                <?php }
                                                                 else if (!empty($fee_value->amount_detail)) {?>
                                                                     <span class="label label-warning"><?php echo $this->lang->line('partial'); ?></span>
-                                                                <?php } 
+                                                                <?php }
                                                                 else { ?>
                                                                     <span class="label label-danger"><?php echo $this->lang->line('unpaid'); ?></span><?php
                                                                 } ?>
@@ -509,7 +509,7 @@
                                                                         <div class="fee_detail_popover" style="display: none">
                                                                             <?php if ($fee_deposits_value->description == "") { ?>
                                                                                 <p class="text text-danger"><?php echo $this->lang->line('no_description'); ?></p>
-                                                                            <?php } 
+                                                                            <?php }
                                                                             else { ?>
                                                                                 <p class="text text-info"><?php echo $fee_deposits_value->description; ?></p>
                                                                             <?php } ?>
@@ -524,7 +524,7 @@
                                                                     <td class="text text-right"><?php echo (number_format($fee_deposits_value->amount, 2, '.', '')); ?></td>
                                                                     <td></td>
                                                                 </tr>
-                                                            <?php } 
+                                                            <?php }
                                                         } ?>
                                                     <?php }
                                                 } ?>
@@ -543,12 +543,12 @@
                                                                     <div class="fee_detail_popover" style="display: none">
                                                                         <?php if ($fee_deposits_value->description == "") { ?>
                                                                             <p class="text text-danger"><?php echo $this->lang->line('no_description'); ?></p>
-                                                                        <?php } 
+                                                                        <?php }
                                                                         else {?>
                                                                             <p class="text text-danger"><?php echo $discount_value['student_fees_discount_description'] ?></p>
                                                                         <?php } ?>
                                                                     </div>
-                                                                <?php } 
+                                                                <?php }
                                                                 else {
                                                                     echo '<p class="text text-danger">' . $this->lang->line('discount_of') . " " . $currency_symbol . $discount_value['amount'] . " " . $this->lang->line($discount_value['status']);
                                                                 } ?>
@@ -561,7 +561,7 @@
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
-                                                        </tr> 
+                                                        </tr>
                                                     <?php }
                                                 } ?>
 
@@ -590,12 +590,12 @@
                             <div class="timeline-header no-border">
                                 <div id="timeline_list">
                                     <?php if (empty($timeline_list)) { ?>
-                                    <?php } 
+                                    <?php }
                                     else { ?>
                                         <ul class="timeline timeline-inverse">
                                             <?php foreach ($timeline_list as $key => $value) { ?>
                                                 <li class="time-label">
-                                                    <span class="bg-blue">    
+                                                    <span class="bg-blue">
                                                         <?php echo date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($value['timeline_date']));?></span>
                                                 </li>
                                                 <li>
@@ -613,8 +613,8 @@
                                             <?php } ?>
                                             <li><i class="fa fa-clock-o bg-gray"></i></li>
                                         </ul>
-                                    <?php } ?>                                    
-                                </div> 
+                                    <?php } ?>
+                                </div>
                                 <!-- <h2 class="page-header"><?php //echo $this->lang->line('documents'); ?> <?php //echo $this->lang->line('list'); ?></h2> -->
                             </div>
                         </div>
@@ -640,25 +640,30 @@
                                         </thead>
                                         <?php
                                         if (empty($student_doc)) { ?>
-                                        <?php } 
+                                        <?php }
                                         else { ?>
                                             <tbody>
                                                 <?php foreach ($student_doc as $value) { ?>
                                                     <tr>
+                                                      <form action="<?php echo base_url(); ?>user/user/download/<?php echo $value['student_id'] . "/" . $value['new_name']; ?>" method="post">
                                                         <td><?php echo $value['title']; ?></td>
-                                                        <td><?php echo $value['doc']; ?></td>
+
+                                                        <td><input style="border: none; outline: none; background: transparent;" type="text" name="docName" value="<?php echo $value['doc']; ?>" size="100%" readonly></td>
                                                         <td class="mailbox-date text-right">
-                                                            <a data-placement="left" href="<?php echo base_url(); ?>user/user/download/<?php echo $value['student_id'] . "/" . $value['doc']; ?>"class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('download'); ?>">
-                                                                <i class="fa fa-download"></i>
-                                                            </a>
+                                                            <!-- <a data-placement="left" href="<?php echo base_url(); ?>user/user/download/<?php echo $value['student_id'] . "/" . $value['new_name']; ?>"class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('download'); ?>"> -->
+                                                              <button style="border: none; " type="submit" name="button"><i class="fa fa-download"></i></button>
+
+                                                            <!-- </a> -->
                                                         </td>
+                                                      </form>
+
                                                     </tr>
-                                                <?php } ?> 
+                                                <?php } ?>
                                             </tbody>
                                         <?php } ?>
                                     </table>
                                 </div>
-                            </div>                         
+                            </div>
                         </div>
 
                         <div class="tab-pane" id="exam">
@@ -666,16 +671,16 @@
                                 <?php echo $this->lang->line('exam')." ".$this->lang->line('result');?>
                             </div>
 
-                            <?php if (empty($exam_result)) {?>  
+                            <?php if (empty($exam_result)) {?>
                                 <div class="alert alert-danger"><?php echo $this->lang->line('no_record_found'); ?></div>
                             <?php }
                             if (!empty($exam_result)) { ?>
-                                <div class="dt-buttons btn-group pull-right miusDM40">   
-                                    <a class="btn btn-default btn-xs dt-button no_print" id="print" onclick="printDiv()"><i class="fa fa-print"></i></a> 
-                                </div> 
+                                <div class="dt-buttons btn-group pull-right miusDM40">
+                                    <a class="btn btn-default btn-xs dt-button no_print" id="print" onclick="printDiv()"><i class="fa fa-print"></i></a>
+                                </div>
                                 <?php foreach ($exam_result as $exam_key => $exam_value) { ?>
                                     <div class="tshadow mb25">
-                                        <h4 class="pagetitleh"><?php echo $exam_value->exam; ?></h4>   
+                                        <h4 class="pagetitleh"><?php echo $exam_value->exam; ?></h4>
                                         <?php if (!empty($exam_value->exam_result)) {
                                             if ($exam_value->exam_result['exam_connection'] == 0) {
                                                 if (!empty($exam_value->exam_result['result'])) {
@@ -695,7 +700,7 @@
                                                                 <th><?php echo $this->lang->line('grade') . " " . $this->lang->line('point'); ?></th>
                                                                 <th><?php echo $this->lang->line('credit') . " " . $this->lang->line('hours'); ?></th>
                                                                 <th><?php echo $this->lang->line('quality') . " " . $this->lang->line('points') ?></th>
-                                                            <?php } 
+                                                            <?php }
                                                             if ($exam_value->exam_type != "gpa") { ?>
                                                                 <th><?php echo $this->lang->line('max') . " " . $this->lang->line('marks'); ?></th>
                                                                 <th><?php echo $this->lang->line('min') . " " . $this->lang->line('marks') ?></th>
@@ -734,7 +739,7 @@
                                                                                     echo "&nbsp;" . $this->lang->line('abs');
                                                                                 } ?>
                                                                             </td>
-                                                                        <?php } 
+                                                                        <?php }
                                                                         elseif ($exam_value->exam_type == "gpa") { ?>
                                                                             <td>
                                                                                 <?php $percentage_grade = ($exam_result_value->get_marks * 100) / $exam_result_value->max_marks;
@@ -742,7 +747,7 @@
                                                                                 $exam_total_points = $exam_total_points + $point;
                                                                                 echo number_format($point, 2, '.', ''); ?>
                                                                             </td>
-                                                                            <td> 
+                                                                            <td>
                                                                                 <?php echo $exam_result_value->credit_hours;
                                                                                 $exam_credit_hour = $exam_credit_hour + $exam_result_value->credit_hours;?>
                                                                             </td>
@@ -750,7 +755,7 @@
                                                                                 <?php echo number_format($exam_result_value->credit_hours * $point, 2, '.', '');
                                                                                 $exam_quality_points = $exam_quality_points + ($exam_result_value->credit_hours * $point);?>
                                                                             </td>
-                                                                        <?php } 
+                                                                        <?php }
                                                                         if ($exam_value->exam_type == "coll_grade_system" || $exam_value->exam_type == "school_grade_system") { ?>
                                                                             <td><?php echo findExamGrade($exam_grade, $exam_value->exam_type, $percentage_grade); ?></td>
                                                                         <?php }
@@ -758,7 +763,7 @@
                                                                             <td>
                                                                                 <?php if ($exam_result_value->get_marks < $exam_result_value->min_marks) { ?>
                                                                                     <label class="label label-danger"><?php echo $this->lang->line('fail') ?><label>
-                                                                                <?php } 
+                                                                                <?php }
                                                                                 else {?>
                                                                                     <label class="label label-success"><?php echo $this->lang->line('pass') ?><label>
                                                                                 <?php }?>
@@ -770,39 +775,39 @@
                                                             } ?>
                                                         </tbody>
                                                     </table>
-                                                    
+
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <div class="bgtgray">   
+                                                            <div class="bgtgray">
                                                             <?php if ($exam_value->exam_type != "gpa") { ?>
-                                                                <div class="col-sm-3 col-lg-3 col-md-3"> 
-                                                                    <div class="description-block">       
+                                                                <div class="col-sm-3 col-lg-3 col-md-3">
+                                                                    <div class="description-block">
                                                                         <h5 class="description-header"><?php echo $this->lang->line('percentage') ?> :  <span class="description-text">
                                                                             <?php $exam_percentage = ($exam_get_total * 100) / $exam_grand_total;
                                                                             echo number_format($exam_percentage, 2, '.', '');?></span>
                                                                         </h5>
-                                                                    </div>  
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-sm-4 col-lg-4 col-md-4 border-right">    
+                                                                <div class="col-sm-4 col-lg-4 col-md-4 border-right">
                                                                     <div class="description-block">
-                                                                        <h5 class="description-header"><?php echo $this->lang->line('result') ?> : 
-                                                                            <span class="description-text"> 
+                                                                        <h5 class="description-header"><?php echo $this->lang->line('result') ?> :
+                                                                            <span class="description-text">
                                                                                 <?php if ($total_exams) {
                                                                                     if ($exam_absent_status) {?>
                                                                                         <span class='label label-danger'>
                                                                                             <?php echo $this->lang->line('fail');?>
                                                                                         </span>
-                                                                                    <?php } 
+                                                                                    <?php }
                                                                                     else {
                                                                                         if ($exam_pass_status) {?>
                                                                                             <span class='label bg-green' style="margin-right: 5px;">
                                                                                                 <?php echo $this->lang->line('pass'); ?>
-                                                                                            </span> 
-                                                                                        <?php } 
+                                                                                            </span>
+                                                                                        <?php }
                                                                                         else {?>
                                                                                             <span class='label label-danger'>
                                                                                                 <?php echo $this->lang->line('fail'); ?>
-                                                                                            </span> 
+                                                                                            </span>
                                                                                         <?php }
 
                                                                                         if ($exam_pass_status) {
@@ -814,7 +819,7 @@
                                                                                             } elseif ($exam_percentage >= 0 && $exam_percentage < 50) {
                                                                                                 echo " :" . $this->lang->line('third');
                                                                                             } else {
-                                                                                                
+
                                                                                             }
                                                                                         }
                                                                                     }
@@ -832,23 +837,23 @@
 
                                                                 <div class="col-sm-3 col-lg-3 col-md-3 border-right">
                                                                     <div class="description-block">
-                                                                        <h5 class="description-header"><?php echo $this->lang->line('total') . " " . $this->lang->line('obtain') . " " . $this->lang->line('marks') ?> :  
+                                                                        <h5 class="description-header"><?php echo $this->lang->line('total') . " " . $this->lang->line('obtain') . " " . $this->lang->line('marks') ?> :
                                                                             <span class="description-text"><?php echo $exam_get_total; ?></span>
                                                                         </h5>
                                                                     </div>
                                                                 </div>
-                                                            <?php } 
+                                                            <?php }
                                                             elseif ($exam_value->exam_type == "gpa") { ?>
-                                                                <div class="col-sm-2">   
-                                                                    <div class="description-block">  
-                                                                        <h5 class="description-header"><?php echo $this->lang->line('credit') . " " . $this->lang->line('hours'); ?> :  
+                                                                <div class="col-sm-2">
+                                                                    <div class="description-block">
+                                                                        <h5 class="description-header"><?php echo $this->lang->line('credit') . " " . $this->lang->line('hours'); ?> :
                                                                             <span class="description-text"><?php echo $exam_credit_hour; ?></span>
                                                                         </h5>
                                                                     </div>
-                                                                </div>  
+                                                                </div>
                                                                 <div class="col-sm-3">
                                                                     <div class="description-block">
-                                                                        <h5 class="description-header"><?php echo $this->lang->line('quality') . " " . $this->lang->line('points') ?> :  
+                                                                        <h5 class="description-header"><?php echo $this->lang->line('quality') . " " . $this->lang->line('points') ?> :
                                                                             <span class="description-text"><?php echo $exam_quality_points . "/" . $exam_credit_hour . '=' . number_format($exam_quality_points / $exam_credit_hour, 2, '.', ''); ?>  </span>
                                                                         </h5>
                                                                     </div>
@@ -1020,12 +1025,12 @@
                                                                         </table>
                                                                                 <div class="row">
                                                                                     <div class="col-md-12">
-                                                                                        <div class="bgtgray"> 
+                                                                                        <div class="bgtgray">
                                                                                             <?php
                                                                                             if ($exam_value->exam_type != "gpa") {
                                                                                                 ?>
-                                                                                                <div class="col-sm-3 col-lg-3 col-md-3 pull no-print"> 
-                                                                                                    <div class="description-block">       
+                                                                                                <div class="col-sm-3 col-lg-3 col-md-3 pull no-print">
+                                                                                                    <div class="description-block">
                                                                                                         <h5 class="description-header"> <?php echo $this->lang->line('percentage') ?> :  <span class="description-text">
 
                                                                                                                 <?php
@@ -1033,11 +1038,11 @@
                                                                                                                 echo number_format($exam_percentage, 2, '.', '');
                                                                                                                 ?>
                                                                                                             </span></h5>
-                                                                                                    </div>  
+                                                                                                    </div>
                                                                                                 </div>
-                                                                                                <div class="col-sm-4 col-lg-4 col-md-4 border-right no-print">    
+                                                                                                <div class="col-sm-4 col-lg-4 col-md-4 border-right no-print">
                                                                                                     <div class="description-block">
-                                                                                                        <h5 class="description-header"><?php echo $this->lang->line('result'); ?> :<span class="description-text"> 
+                                                                                                        <h5 class="description-header"><?php echo $this->lang->line('result'); ?> :<span class="description-text">
 
 
                                                                                                                 <?php
@@ -1074,7 +1079,7 @@
                                                                                                                         }
                                                                                                                     }
                                                                                                                 }
-                                                                                                                ?>   
+                                                                                                                ?>
 
                                                                                                                 <?php
                                                                                                                 if ($total_exams) {
@@ -1093,14 +1098,14 @@
 
                                                                                                                             echo " : " . $this->lang->line('third');
                                                                                                                         } else {
-                                                                                                                            
+
                                                                                                                         }
                                                                                                                     }
                                                                                                                 }
-                                                                                                                ?> 
+                                                                                                                ?>
 
-                                                                                                            </span></h5>  
-                                                                                                    </div>  
+                                                                                                            </span></h5>
+                                                                                                    </div>
                                                                                                 </div>
 
                                                                                                 <div class="col-sm-2 col-lg-2 col-md-2 border-right no-print">
@@ -1116,8 +1121,8 @@
                                                                                                 <?php
                                                                                             } elseif ($exam_value->exam_type == "gpa") {
                                                                                                 ?>
-                                                                                                <div class="col-sm-3 col-lg-3 col-md-3 pull no-print">   
-                                                                                                    <div class="description-block">  
+                                                                                                <div class="col-sm-3 col-lg-3 col-md-3 pull no-print">
+                                                                                                    <div class="description-block">
                                                                                                         <h5 class="description-header">
                                                                                                             <?php echo $this->lang->line('credit') . " " . $this->lang->line('hours'); ?> :
                                                                                                             <span class="description-text"><?php echo $exam_credit_hour; ?>
@@ -1128,7 +1133,7 @@
                                                                                                 <div class="col-sm-3 pull no-print">
                                                                                                     <div class="description-block">
                                                                                                         <h5 class="description-header">
-                                                                                                            <?php echo $this->lang->line('quality') . " " . $this->lang->line('points'); ?> :<span class="description-text"><?php echo $exam_quality_points . "/" . $exam_credit_hour . '=' . number_format($exam_quality_points / $exam_credit_hour, 2, '.', ''); ?> 
+                                                                                                            <?php echo $this->lang->line('quality') . " " . $this->lang->line('points'); ?> :<span class="description-text"><?php echo $exam_quality_points . "/" . $exam_credit_hour . '=' . number_format($exam_quality_points / $exam_credit_hour, 2, '.', ''); ?>
                                                                                                             </span>
                                                                                                         </h5>
                                                                                                     </div>
@@ -1143,7 +1148,7 @@
                                                                             </div>
                                                                             </div>
                                                                             <div class="tshadow mb25">
-                                                                                <h4 class="pagetitleh"> 
+                                                                                <h4 class="pagetitleh">
                                                                                     <?php echo $this->lang->line('consolidated') . " " . $this->lang->line('marksheet'); ?>
                                                                                 </h4>
                                                                                 <?php
@@ -1319,11 +1324,11 @@
                                                                                     ?>
                                                                                     <div class="row">
                                                                                         <div class="col-md-12">
-                                                                                            <div class="bgtgray">   
+                                                                                            <div class="bgtgray">
 
-                                                                                                <div class="col-sm-3 pull no-print"> 
-                                                                                                    <div class="description-block">       
-                                                                                                        <h5 class="description-header"><?php echo $this->lang->line('result') ?> :  
+                                                                                                <div class="col-sm-3 pull no-print">
+                                                                                                    <div class="description-block">
+                                                                                                        <h5 class="description-header"><?php echo $this->lang->line('result') ?> :
                                                                                                             <span class="description-text">
                                                                                                                 <?php
                                                                                                                 if ($consolidate_exam_result == "pass") {
@@ -1348,14 +1353,14 @@
                                                                                                                 ?>
                                                                                                             </span>
                                                                                                         </h5>
-                                                                                                    </div>  
+                                                                                                    </div>
                                                                                                 </div>
                                                                                                 <?php
                                                                                                 if ($consolidate_exam_result_percentage) {
                                                                                                     ?>
-                                                                                                    <div class="col-sm-3 border-right no-print">    
+                                                                                                    <div class="col-sm-3 border-right no-print">
                                                                                                         <div class="description-block">
-                                                                                                            <h5 class="description-header"><?php echo $this->lang->line('division'); ?> :<span class="description-text"> 
+                                                                                                            <h5 class="description-header"><?php echo $this->lang->line('division'); ?> :<span class="description-text">
 
                                                                                                                     <?php
                                                                                                                     if ($consolidate_exam_result_percentage >= 60) {
@@ -1367,11 +1372,11 @@
 
                                                                                                                         echo $this->lang->line('third');
                                                                                                                     } else {
-                                                                                                                        
+
                                                                                                                     }
                                                                                                                     ?>
-                                                                                                                </span></h5>  
-                                                                                                        </div>  
+                                                                                                                </span></h5>
+                                                                                                        </div>
                                                                                                     </div>
                                                                                                     <?php
                                                                                                 }
@@ -1406,18 +1411,18 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title title text-center transport_fees_title"></h4>
-            </div>            
-                
+            </div>
+
             <input  type="hidden" class="form-control" id="transport_student_session_id"  value="0" readonly="readonly"/>
             <form id="form1" action="<?php echo site_url('user/user/create_doc') ?>"  id="employeeform" name="employeeform" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                 <?php echo $this->customlib->getCSRF(); ?>
-                <div class="modal-body pb0">     
+                <div class="modal-body pb0">
                 <div id='upload_documents_hide_show'>
                     <input type="hidden" name="student_id" value="<?php echo $student_doc_id; ?>" id="student_id">
-                    
-                    
 
-                        
+
+
+
                             <div class="form-group">
                                 <label for="exampleInputEmail1"><?php echo $this->lang->line('title'); ?> <small class="req">*</small></label>
                                 <input id="first_title" name="first_title" placeholder="" type="text" class="form-control"  value="<?php echo set_value('first_title'); ?>" />
@@ -1430,15 +1435,15 @@
                                     <input  name="first_doc" placeholder="" type="file" class="form-control filestyle" data-height="30"  value="<?php echo set_value('first_doc'); ?>" />
                                     <span class="text-danger"><?php echo form_error('first_doc'); ?></span></div>
                             </div>
-                        
+
                     </div>
                 </div>
                 <div class="modal-footer" style="clear:both">
                     <!-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><?php //echo $this->lang->line('cancel'); ?></button> -->
                     <button type="submit" class="btn btn-info pull-right"><?php echo $this->lang->line('save'); ?></button>
                 </div>
-            </form>                   
-                
+            </form>
+
         </div>
     </div>
 </div>
@@ -1664,17 +1669,17 @@ function getCalculatedExam($array, $exam_id) {
     });
 
     document.getElementById("print").style.display = "block";
-    
-    function printDiv() { 
+
+    function printDiv() {
         document.getElementById("print").style.display = "none";
-        
+
             $('.bg-green').removeClass('label');
             $('.label-danger').removeClass('label');
             $('.label-success').removeClass('label');
         var divElements = document.getElementById('exam').innerHTML;
         var oldPage = document.body.innerHTML;
-        document.body.innerHTML = 
-            "<html><head><title></title></head><body>" + 
+        document.body.innerHTML =
+            "<html><head><title></title></head><body>" +
             divElements + "</body>";
         window.print();
         document.body.innerHTML = oldPage;
@@ -1704,5 +1709,3 @@ function getCalculatedExam($array, $exam_id) {
         });
     });
 </script>
-                                                                                              
-
