@@ -1,5 +1,6 @@
 <script type="text/javascript" src="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"></script>
 <script type="text/javascript" src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -40,7 +41,7 @@
 
                         <!-- this is for the filter based on subjects -->
                         <form method="post" >
-                          <select id="selectedSubject" name="selectedSubject" class="form-control" onchange="this.form.submit();">
+                          <select id="selectedSubject" name="selectedSubject" class="form-control filter" onchange="this.form.submit();">
                               <?php
                               $ctr = 0;
                                 foreach ($subjects as $subject) {
@@ -342,6 +343,7 @@
 </div>
 
 <script>
+    $('.filter').select2();
     var table = $('#myTable').DataTable();
     var attendance_table = $('#attendance_table').DataTable();
     var user_id = '<?php echo $user_id ?>';
