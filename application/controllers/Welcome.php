@@ -757,6 +757,14 @@ class Welcome extends Front_Controller
         $data = $this->student_model->GetStudentInfo($idnumber);
         echo json_encode($data);
     }
+    
+    public function searchStudentDetailsByFullnameId()
+    {
+        $search = $_POST['search'];
+        $name = $this->student_model->getNameAdmission($search);
+        
+        echo json_encode($name); die;
+    }
 
     public function AutoCompleteStudentNameForAdmission() 
     {

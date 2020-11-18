@@ -2399,4 +2399,56 @@ return false;
         // else
         //     return false;
     }
+    
+    public function getNameAdmission($search)
+    {
+        
+        $this->db->select("DISTINCT(students.id), students.firstname, students.middlename, students.lastname, students.email, students.gender, students.dob, classes.class");
+        //$this->db->select("students.id, students.firstname, students.middlename, students.lastname, students.email, students.gender, students.dob");
+        $this->db->from("students");
+        $this->db->join('student_session', 'student_session.student_id = students.id');
+        $this->db->join('classes', 'student_session.class_id = classes.id');
+        $this->db->join('sections', 'sections.id = student_session.section_id');
+        //$this-db->join('online_admissions', 'online_admissions.admission_no = students.admission_no');
+        //$this-db->join('class_sections', 'class_sections.id = online_admissions.class_section_id');
+        //$this-db->join('classes', 'classes.id = class_sections.class_id');
+        $this->db->where("lower(concat(students.firstname, ' ', students.lastname, ' ', students.admission_no, ' ', students.roll_no)) LIKE '%".strtolower(urldecode($search))."%'");
+        $this->db->order_by('students.created_at', 'asc');
+        $this->db->limit(1);
+        $query = $this->db->get();
+        $result = ($query->num_rows() > 0) ? $query->result_array() : FALSE;
+
+        return $result;
+    }
+    
+    public function getStudentAllInfo($id)
+    {
+        $this->db->select("DISTINCT(students.id), students.firstname, students.middlename, students.lastname, students.email, students.gender, students.dob, classes.class");
+        //$this->db->select("students.id, students.firstname, students.middlename, students.lastname, students.email, students.gender, students.dob");
+        $this->db->from("students");
+        $this->db->join('student_session', 'student_session.student_id = students.id');
+        $this->db->join('classes', 'student_session.class_id = classes.id');
+        $this->db->join('sections', 'sections.id = student_session.section_id');
+        //$this-db->join('online_admissions', 'online_admissions.admission_no = students.admission_no');
+        //$this-db->join('class_sections', 'class_sections.id = online_admissions.class_section_id');
+        //$this-db->join('classes', 'classes.id = class_sections.class_id');
+        $this->db->where("students.id = ".$id."");
+        $this->db->order_by('students.created_at', 'asc');
+        $this->db->limit(1);
+        $query = $this->db->get();
+        $result = ($query->num_rows() > 0) ? $query->result_array() : FALSE;
+
+        return $result;
+    }
+    
+    /*public function saveAdmission($data, $session)
+    {
+        $this->db->insert('online_admissions', $data);
+        $this->db->insert('student_session', $session);
+    }
+    public function updateAdmission($data, $session)
+    {
+        $this->db->update('online_admissions', $data);
+        $this->db->update('student_session', $session);
+    }*/
 }

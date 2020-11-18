@@ -218,6 +218,26 @@ class Student extends Admin_Controller
         $this->load->view('student/studentShow', $data);
         $this->load->view('layout/footer', $data);
     }
+    
+    public function viewDetails(){
+        
+        $data['title']         = 'Student Details';
+        $data['content'] = $this->student_model->getStudentAllInfo($_GET['id']);
+        $data['classlist']          = $class;
+        $data['payment_scheme_list'] = $this->onlinestudent_model->GetPaymentSchemes();
+        $data['payment_mode_list'] = $this->onlinestudent_model->GetModesOfPayment();
+        
+        $this->load->view('layout/header', $data);
+        $this->load->view('student/studentDetails', $data);
+        $this->load->view('layout/footer', $data);
+    }
+    
+    /*public function saveAdmission()
+    {
+        if($this->input->post(enrollmentType) == 'old'){
+            
+        }
+    }*/
 
     public function exportformat()
     {
@@ -325,7 +345,7 @@ class Student extends Admin_Controller
         if ($this->form_validation->run() == false)
         {
             $this->load->view('layout/header', $data);
-            $this->load->view('student/studentCreate', $data);
+            $this->load->view('student/studentCreate_', $data);
             $this->load->view('layout/footer', $data);
         }
         else
@@ -856,7 +876,7 @@ class Student extends Admin_Controller
             {
                 $data['error_message'] = $this->lang->line('admission_no') . ' ' . $admission_no . ' ' . $this->lang->line('already_exists');
                 $this->load->view('layout/header', $data);
-                $this->load->view('student/studentCreate', $data);
+                $this->load->view('student/studentCreate_', $data);
                 $this->load->view('layout/footer', $data);
             }
         }
