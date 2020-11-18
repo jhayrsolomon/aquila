@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 <script src="<?php echo base_url(); ?>backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<div class="content-wrapper">   
+<div class="content-wrapper">
     <section class="content-header">
         <h1>
             <i class="fa fa-envelope"></i> <?php echo $this->lang->line('notice_board'); ?></small>
@@ -15,9 +15,9 @@
                         <h3 class="box-title titlefix"> <?php echo $this->lang->line('notice_board'); ?></h3>
                         <div class="box-tools pull-right">
                         </div>
-                    </div>                
+                    </div>
                     <div class="box-body">
-                        <div class="box-group" id="accordion">                          
+                        <div class="box-group" id="accordion">
                             <?php if (empty($notificationlist)) {
                                 ?>
                                 <div class="alert alert-info"><?php echo $this->lang->line('no_record_found'); ?></div>
@@ -62,9 +62,9 @@
                             }
                             ?>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
-            </div>          
+            </div>
         </div>
 </div>
 </section>
@@ -79,18 +79,25 @@
         $("#btnreset").click(function () {
             $("#form1")[0].reset();
         });
+        var collapseItem = localStorage.getItem('collapseItem');
+        if(collapseItem){
+          $(collapseItem).collapse('show');
+        }
     });
 </script>
 <script>
     $(document).on('click', '.notification_msg', function () {
         var base_url = '<?php echo base_url() ?>';
         var notification_id = $(this).data('msgid');
+        localStorage.setItem('collapseItem', $(this).attr('href'));
         $.ajax({
             type: "POST",
             url: base_url + "user/notification/updatestatus",
             data: {'notification_id': notification_id},
             dataType: "json",
             success: function (data) {
+
+              window.location.reload(base_url);
             }
         });
     });
